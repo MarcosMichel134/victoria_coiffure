@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Victoria Coiffure - Salon de coiffure pour hommes</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+  </head>
+  <body>
+    <!-- EN-TÊTE / NAVIGATION -->
+    <header class="header">
+      <div class="container">
+        <nav class="navbar">
+          <div class="logo">
+            <h1>Victoria<span>Coiffure</span></h1>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="#accueil" class="nav-link">Accueil</a></li>
+            <li><a href="#services" class="nav-link">Services</a></li>
+            <li><a href="#galerie" class="nav-link">Galerie</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+          </ul>
+          <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- SECTION HERO -->
+      <section id="accueil" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+          <h2 class="hero-title">L'EXCELLENCE DU STYLE MASCULIN</h2>
+          <p class="hero-subtitle">
+            Découvrez l'art du barbier traditionnel avec une touche moderne
+          </p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary btn-reservation">
+              RÉSERVER MAINTENANT
+            </button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number" id="client-counter">0</span>
+              <span class="stat-label">Clients satisfaits</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">10+</span>
+              <span class="stat-label">Années d'expérience</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">4.8</span>
+              <span class="stat-label">Note moyenne</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION SERVICES - SLIDER -->
+      <section id="services" class="services fade-in">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">NOS TARIFS</span>
+            <h2 class="section-title">Services <span>Premium</span></h2>
+            <p class="section-description">
+              Des prestations sur mesure pour hommes exigeants
+            </p>
+          </div>
+
+          <!-- Slider Services -->
+          <div class="swiper services-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="service-card">
+                  <div class="service-icon">
+                    <i class="fas fa-cut"></i>
+                  </div>
+                  <h3>Coupe simple</h3>
+                  <p>Hommes & Dames : Rapide, nette, efficace</p>
+                  <div class="service-price">500 FCFA</div>
+                  <!-- <span class="service-duration">45 min</span> -->
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="service-card">
+                  <div class="service-icon">
+                    <i class="fas fa-arrow-up"></i>
+                  </div>
+                  <h3>Coupe complexe</h3>
+                  <p>Hommes : Dégradé précis, style travaillé</p>
+                  <div class="service-price">1.000 FCFA</div>
+                  <!-- <span class="service-duration">50 min</span> -->
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="service-card">
+                  <div class="service-icon">
+                    <i class="fas fa-beard"></i>
+                  </div>
+                  <h3>Coupe complexe</h3>
+                  <p>Dames : Dégradé précis, style travaillé</p>
+                  <div class="service-price">1.500 FCFA</div>
+                  <!-- <span class="service-duration">30 min</span> -->
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="service-card">
+                  <div class="service-icon">
+                    <i class="fas fa-spa"></i>
+                  </div>
+                  <h3>Barbe complète</h3>
+                  <p>Taille, modelage, soin premium</p>
+                  <div class="service-price">300 FCFA - 500 FCFA</div>
+                  <!-- <span class="service-duration">20 min</span> -->
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="service-card">
+                  <div class="service-icon">
+                    <i class="fas fa-paint-brush"></i>
+                  </div>
+                  <h3>Coupe Enfant</h3>
+                  <p>Douce, rapide, ludique</p>
+                  <div class="service-price">300 FCFA</div>
+                  <!-- <span class="service-duration">1h</span> -->
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="service-card">
+                  <div class="service-icon">
+                    <i class="fas fa-paint-brush"></i>
+                  </div>
+                  <h3>Coloration de cheveux</h3>
+                  <p>Teinte : Blanc, Or, Noire, etc</p>
+                  <div class="service-price">A partir de 500 FCFA</div>
+                  <!-- <span class="service-duration">1h</span> -->
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="service-card featured">
+                  <div class="service-badge">Attention</div>
+                  <div class="service-icon">
+                    <i class="fas fa-crown"></i>
+                  </div>
+                  <h3>Coiffure à domicile</h3>
+                  <p>Frais de déplacemment vers client</p>
+                  <div class="service-price">2.000 FCFA</div>
+                  <!-- <span class="service-duration">1h 30</span> -->
+                </div>
+              </div>
+            </div>
+            <!-- Pagination et navigation -->
+            <div class="swiper-pagination services-pagination"></div>
+            <div class="swiper-button-next services-next"></div>
+            <div class="swiper-button-prev services-prev"></div>
+          </div>
+
+          <div class="urgency-banner">
+            <i class="fas fa-exclamation-circle"></i>
+            <p>
+              <strong>Places limitées aujourd'hui</strong> - Réservez vite votre
+              créneau
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION GALERIE - SLIDER -->
+      <section id="galerie" class="gallery fade-in">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">NOTRE PORTFOLIO</span>
+            <h2 class="section-title">
+              Galerie <span>Victoria Coiffure</span>
+            </h2>
+            <p class="section-description">
+              Inspirez-vous de nos dernières réalisations
+            </p>
+          </div>
+
+          <!-- Slider Galerie -->
+          <div class="swiper gallery-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="gallery-item">
+                  <img src="victoria.jpg" alt="Coloration cheveux homme" />
+                  <div class="gallery-overlay">
+                    <span>Coloration</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="gallery-item">
+                  <img
+                    src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                    alt="Coupe dégradé"
+                  />
+                  <div class="gallery-overlay">
+                    <span>Coupe dégradé</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="gallery-item">
+                  <img
+                    src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
+                    alt="Coupe classique homme"
+                  />
+                  <div class="gallery-overlay">
+                    <span>Taper Fade</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="gallery-item">
+                  <img
+                    src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                    alt="Taille de barbe"
+                  />
+                  <div class="gallery-overlay">
+                    <span>Taille barbe</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="gallery-item">
+                  <img
+                    src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=874&q=80"
+                    alt="Rasage traditionnel"
+                  />
+                  <div class="gallery-overlay">
+                    <span>Rasage traditionnel</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="gallery-item">
+                  <img
+                    src="https://images.unsplash.com/photo-1517832207067-4db24a2ae47c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                    alt="Soin cheveux"
+                  />
+                  <div class="gallery-overlay">
+                    <span>Soin premium</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Pagination et navigation -->
+            <div class="swiper-pagination gallery-pagination"></div>
+            <div class="swiper-button-next gallery-next"></div>
+            <div class="swiper-button-prev gallery-prev"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION POURQUOI NOUS -->
+      <section class="why-us fade-in">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">NOS ATOUTS</span>
+            <h2 class="section-title">
+              Pourquoi choisir <span>Victoria Coiffure ?</span>
+            </h2>
+          </div>
+          <div class="advantages-grid">
+            <div class="advantage-card">
+              <div class="advantage-icon">
+                <i class="fas fa-cut"></i>
+              </div>
+              <h3>Ciseaux d'or</h3>
+              <p>
+                Artisans coiffeurs formés aux meilleures techniques françaises
+                et internationales
+              </p>
+            </div>
+            <div class="advantage-card">
+              <div class="advantage-icon">
+                <i class="fas fa-flask"></i>
+              </div>
+              <h3>Produits premium</h3>
+              <p>
+                Marques de luxe, sans parabènes, respectueuses de vos cheveux et
+                votre barbe
+              </p>
+            </div>
+            <div class="advantage-card">
+              <div class="advantage-icon">
+                <i class="fas fa-champagne-glasses"></i>
+              </div>
+              <h3>Ambiance VIP</h3>
+              <p>Espace détente, musique d'ambiance sélectionnée</p>
+            </div>
+            <div class="advantage-card">
+              <div class="advantage-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <h3>Rapidité</h3>
+              <p>
+                Respect des horaires, service efficace sans compromis sur la
+                qualité
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION TÉMOIGNAGES -->
+      <section class="testimonials fade-in">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">AVIS CLIENTS</span>
+            <h2 class="section-title">Ils nous <span>font confiance</span></h2>
+          </div>
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                "Meilleur barbier de Cotonou ! Le Taper Fade est parfait à
+                chaque fois. L'ambiance est top et les produits utilisés sentent
+                incroyablement bon."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">
+                  <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="author-info">
+                  <h4>Thomas LOKOSSOU</h4>
+                  <span>Client régulier</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                "Service exceptionnel ! J'ai pris la formule Coupe + Barbe et
+                c'était parfait. Le staff est professionnel et très accueillant.
+                Je recommande à 100%."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">
+                  <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="author-info">
+                  <h4>Lucas AHISSOU</h4>
+                  <span>Client depuis 2 ans</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                "Enfin un salon qui comprend les hommes ! Le soin du cuir
+                chevelu m'a sauvé, j'avais des irritations depuis des années.
+                Produits de qualité et prix raisonnables."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">
+                  <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="author-info">
+                  <h4>Alexandre MENAKPO</h4>
+                  <span>Nouveau client</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION FORMULAIRE DE RÉSERVATION -->
+      <section id="contact" class="booking fade-in">
+        <div class="container">
+          <div class="booking-container">
+            <div class="booking-info">
+              <span class="section-tag">PRENEZ RENDEZ-VOUS</span>
+              <h2 class="booking-title">Réservez <span>votre créneau</span></h2>
+              <p class="booking-description">
+                Complétez le formulaire et nous vous confirmerons votre
+                réservation directement par WhatsApp sous 15 minutes.
+              </p>
+              <div class="booking-features">
+                <div class="feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Confirmation instantanée</span>
+                </div>
+                <div class="feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Rappel 24h avant</span>
+                </div>
+                <div class="feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Modification sans frais</span>
+                </div>
+              </div>
+              <div class="booking-hours">
+                <h4><i class="fas fa-clock"></i> Horaires d'ouverture</h4>
+                <ul>
+                  <li><span>Lundi - Vendredi:</span> 9h00 - 19h00</li>
+                  <li><span>Samedi:</span> 9h00 - 18h00</li>
+                  <li><span>Dimanche:</span> Fermé</li>
+                </ul>
+              </div>
+            </div>
+            <div class="booking-form-container">
+              <form id="bookingForm" class="booking-form">
+                <div class="form-group">
+                  <label for="name">Nom complet *</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Michel MARCOS"
+                  />
+                  <div class="error-message" id="nameError"></div>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Téléphone *</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="01 54 34 56 78"
+                  />
+                  <div class="error-message" id="phoneError"></div>
+                </div>
+                <div class="form-group">
+                  <label for="service">Service *</label>
+                  <select id="service" name="service">
+                    <option value="">Sélectionnez un service</option>
+                    <option value="Coupe Simple">Coupe Simple</option>
+                    <option value="Coupe Complexe - Homme">
+                      Coupe Complexe - Homme
+                    </option>
+                    <option value="Coupe Complexe - Dame">
+                      Coupe Complexe - Dame
+                    </option>
+                    <option value="Barbe Complète">Barbe Complète</option>
+                    <option value="Coupe Enfant">Coupe Enfant</option>
+                    <option value="Coloration">Coloration (Teinte)</option>
+
+                    <option value="Coiffure à domicile">
+                      Coiffure à domicile
+                    </option>
+                  </select>
+                  <div class="error-message" id="serviceError"></div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group half">
+                    <label for="date">Date *</label>
+                    <input type="date" id="date" name="date" />
+                    <div class="error-message" id="dateError"></div>
+                  </div>
+                  <div class="form-group half">
+                    <label for="time">Heure *</label>
+                    <input type="time" id="time" name="time" />
+                    <div class="error-message" id="timeError"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="message">Message (optionnel)</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="3"
+                    placeholder="Précisions particulières..."
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-submit">
+                  <i class="fab fa-whatsapp"></i> Réserver maintenant !
+                </button>
+                <p class="form-note">
+                  En réservant, vous acceptez d'être contacté par WhatsApp
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- PIED DE PAGE -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-col">
+            <div class="footer-logo">
+              <h3>Victoria<span>Coiffure</span></h3>
+            </div>
+            <p class="footer-description">
+              L'excellence du style masculin depuis 2015. Salon de coiffure
+              premium pour hommes exigeants.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-link"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="social-link"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+              <a href="#" class="social-link"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <ul class="footer-contact">
+              <li>
+                <i class="fas fa-map-marker-alt"></i>Cotonou, Godomey Fignonhou
+              </li>
+              <li><i class="fas fa-phone"></i> 01 95 66 84 37</li>
+              <li>
+                <i class="fas fa-envelope"></i> contact@victoriacoiffure.com
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Horaires</h4>
+            <ul class="footer-hours">
+              <li><span>Lun-Ven:</span> 9h - 19h</li>
+              <li><span>Sam:</span> 9h - 18h</li>
+              <li><span>Dim:</span> Fermé</li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Informations</h4>
+            <ul class="footer-links">
+              <li><a href="#">Mentions légales</a></li>
+              <li><a href="#">Politique de confidentialité</a></li>
+              <li><a href="#">CGV</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 Victoria Coiffure - Tous droits réservés</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
