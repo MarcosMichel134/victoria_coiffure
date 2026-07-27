@@ -1,5 +1,29 @@
 // DOM ELEMENTS
 document.addEventListener("DOMContentLoaded", function () {
+  // ========== THÈME CLAIR / SOMBRE ==========
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = themeToggle ? themeToggle.querySelector("i") : null;
+
+  function updateThemeIcon(theme) {
+    if (!themeIcon) return;
+    themeIcon.classList.remove("fa-sun", "fa-moon");
+    themeIcon.classList.add(theme === "dark" ? "fa-sun" : "fa-moon");
+  }
+
+  // Le thème est déjà appliqué sur <html> par le script inline dans <head>
+  // (évite le flash du mauvais thème au chargement de la page)
+  updateThemeIcon(document.documentElement.getAttribute("data-theme"));
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateThemeIcon(newTheme);
+    });
+  }
+
   // ========== MENU HAMBURGER MOBILE ==========
   const hamburger = document.querySelector(".hamburger");
   const navMenu = document.querySelector(".nav-menu");
@@ -326,13 +350,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ========== EFFET DE SCROLL SUR LE HEADER ==========
   window.addEventListener("scroll", function () {
     const header = document.querySelector(".header");
-    if (window.scrollY > 50) {
-      header.style.background = "rgba(10, 10, 10, 0.98)";
-      header.style.padding = "10px 0";
-    } else {
-      header.style.background = "rgba(10, 10, 10, 0.95)";
-      header.style.padding = "15px 0";
-    }
+    header.classList.toggle("scrolled", window.scrollY > 50);
   });
 
   // ========== LIENS ACTIFS AU SCROLL ==========
