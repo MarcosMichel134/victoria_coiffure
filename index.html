@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="fr">
   <head>
+    <script>
+      (function () {
+        var saved = localStorage.getItem("theme");
+        var theme = saved || (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Victoria Coiffure - Salon de coiffure pour hommes</title>
@@ -29,16 +36,26 @@
           <div class="logo">
             <h1>Victoria<span>Coiffure</span></h1>
           </div>
-          <ul class="nav-menu">
-            <li><a href="#accueil" class="nav-link">Accueil</a></li>
-            <li><a href="#services" class="nav-link">Services</a></li>
-            <li><a href="#galerie" class="nav-link">Galerie</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
-          </ul>
-          <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+          <div class="nav-right">
+            <ul class="nav-menu">
+              <li><a href="#accueil" class="nav-link">Accueil</a></li>
+              <li><a href="#services" class="nav-link">Services</a></li>
+              <li><a href="#galerie" class="nav-link">Galerie</a></li>
+              <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button
+              class="theme-toggle"
+              id="themeToggle"
+              type="button"
+              aria-label="Basculer le thème clair/sombre"
+            >
+              <i class="fas fa-sun"></i>
+            </button>
+            <div class="hamburger">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </div>
           </div>
         </nav>
       </div>
