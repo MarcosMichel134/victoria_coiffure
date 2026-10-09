@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaGest - Catalogue Produits</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- VARIABLES DE COULEURS AQUAGEST --- */
+        :root {
+            --sidebar-bg: #1e1e2d; /* Fond sombre de la sidebar */
+            --sidebar-hover: #2b2b40;
+            --primary-purple: #6f42c1; /* Violet des boutons */
+            --primary-purple-hover: #5a32a3;
+            --bg-body: #f4f5f7; /* Fond gris clair */
+            --white: #ffffff;
+            --border-color: #e9ecef;
+            --text-main: #343a40;
+            --text-light: #6c757d;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --blue-accent: #0d6efd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* --- SIMULATION SIDEBAR AQUAGEST --- */
+        .sidebar {
+            width: 260px;
+            background-color: var(--sidebar-bg);
+            color: #a2a3b7;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .sidebar-header span { color: #a2a3b7; font-size: 0.7rem; font-weight: 400; }
+
+        .sidebar-menu {
+            flex: 1;
+            padding: 15px 0;
+            overflow-y: auto;
+        }
+
+        .menu-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .menu-item:hover { background-color: var(--sidebar-hover); color: white; }
+        .menu-item.active { background-color: var(--sidebar-hover); color: white; border-left: 3px solid var(--primary-purple); }
+
+        /* --- CONTENU PRINCIPAL --- */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Header Top */
+        .top-header {
+            background: var(--white);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .page-title .icon-box {
+            background: var(--primary-purple);
+            color: white;
+            padding: 6px;
+            border-radius: 6px;
+            display: flex;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .avatar { background: var(--danger); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
+
+        /* Barre d'onglets (Tabs) */
+        .tabs-bar {
+            background: var(--white);
+            padding: 0 30px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            gap: 20px;
+        }
+
+        .tab {
+            padding: 15px 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-light);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab.active {
+            color: var(--primary-purple);
+            border-bottom: 2px solid var(--primary-purple);
+        }
+
+        /* Zone de travail (Grid) */
+        .workspace {
+            flex: 1;
+            padding: 25px 30px;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        /* --- STYLES DES CARTES ET FORMULAIRES --- */
+        .card {
+            background: var(--white);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        /* Accordéon */
+        .accordion-item {
+            border-bottom: 1px solid var(--border-color);
+        }
+        .accordion-item:last-child { border-bottom: none; }
+
+        .accordion-header {
+            padding: 15px 20px;
+            background: var(--white);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .accordion-header:hover { background-color: #f8f9fa; }
+        .accordion-header.active { background-color: #f8f9fa; color: var(--primary-purple); font-weight: 600; }
+        .accordion-header .arrow { transition: transform 0.3s; font-size: 0.7rem; color: var(--text-light); }
+        .accordion-header.active .arrow { transform: rotate(180deg); color: var(--primary-purple); }
+
+        .accordion-content {
+            padding: 20px;
+            display: none;
+            background: var(--white);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .accordion-content.show { display: block; }
+
+        /* Formulaires */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+        label { font-size: 0.8rem; font-weight: 600; color: var(--text-main); }
+        .text-muted { font-size: 0.75rem; color: var(--text-light); font-weight: 400; }
+
+        input, select, textarea {
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.2s;
+            background: #fff;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.1);
+        }
+
+        /* Boutons */
+        .btn {
+            padding: 10px 16px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary { background: var(--primary-purple); color: white; }
+        .btn-primary:hover { background: var(--primary-purple-hover); }
+        .btn-outline { background: white; border: 1px solid var(--border-color); color: var(--text-main); }
+        .btn-outline:hover { background: #f8f9fa; }
+
+        .form-footer {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* --- COLONNE DROITE (APERÇU) --- */
+        .preview-column { display: flex; flex-direction: column; gap: 20px; }
+
+        .preview-box {
+            height: 140px;
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #adb5bd;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #f1f3f5;
+        }
+        .info-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .info-label { color: var(--text-light); }
+        .info-value { font-weight: 600; color: var(--text-main); }
+
+        .stock-total-box {
+            background: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .stock-total-box .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+        .stock-total-box .value { font-size: 1.6rem; font-weight: 700; }
+
+        /* Prix dynamiques */
+        .price-level-block {
+            background: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .price-level-block:last-child { margin-bottom: 0; }
+        
+        .price-level-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .price-inputs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+        .price-inputs .form-group label { font-size: 0.75rem; color: var(--text-light); }
+        
+        .margin-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #e3f2fd;
+            color: #0d6efd;
+        }
+        .margin-badge.positive { background: #e8f5e9; color: #2e7d32; }
+        .margin-badge.negative { background: #ffebee; color: #c62828; }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .workspace { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .sidebar { display: none; } /* Cacher la sidebar sur mobile */
+            .form-grid, .price-inputs { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIMULATION SIDEBAR AQUAGEST -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <span style="background:var(--primary-purple); color:white; padding:5px; border-radius:5px;">📦</span>
+            AquaGest <span>v1</span>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-item">📊 Tableau de bord</div>
+            <div class="menu-item">🔥 Ventes & Caisse</div>
+            <div class="menu-item active">📦 Stock & Rayons</div>
+            <div class="menu-item" style="padding-left: 45px; font-size: 0.85rem;">📋 Stock</div>
+            <div class="menu-item" style="padding-left: 45px; font-size: 0.85rem;">📝 Inventaire</div>
+            <div class="menu-item" style="padding-left: 45px; font-size: 0.85rem;">📄 Fiche Journalière</div>
+            <div class="menu-item" style="padding-left: 45px; font-size: 0.85rem;">🏷️ Codes-barres</div>
+            <div class="menu-item" style="padding-left: 45px; font-size: 0.85rem;">🏪 Rayons</div>
+            <div class="menu-item" style="padding-left: 45px; font-size: 0.85rem;">🔢 Codes PLU</div>
+            <div class="menu-item" style="margin-top: 20px;">🌙 Thème clair</div>
+            <div class="menu-item">🚪 Déconnexion</div>
+        </div>
+    </div>
+
+    <!-- CONTENU PRINCIPAL -->
+    <div class="main-content">
+        
+        <!-- Header Top -->
+        <div class="top-header">
+            <div class="page-title">
+                <div class="icon-box">🛒</div>
+                Catalogue Produits
+            </div>
+            <div class="user-profile">
+                <div class="avatar">CA</div>
+                <div>
+                    <div>CAMILLA</div>
+                    <div style="font-size: 0.7rem; color: var(--text-light); font-weight: 400;">ADMINISTRATEUR</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs-bar">
+            <div class="tab active">📦 Produits</div>
+            <div class="tab">🏗️ Architectures</div>
+            <div class="tab">📥 Import CSV</div>
+        </div>
+
+        <!-- Workspace -->
+        <div class="workspace">
+            
+            <!-- COLONNE GAUCHE : FORMULAIRE -->
+            <div class="form-column">
+                
+                <div class="card">
+                    <div class="card-header">
+                        ➕ Nouveau Produit
+                    </div>
+                    
+                    <!-- Étape 1 : Identification -->
+                    <div class="accordion-item">
+                        <div class="accordion-header active" onclick="toggleAccordion(this)">
+                            <span>1. Identification du produit</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="accordion-content show">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Nom du produit <span style="color:var(--danger)">*</span></label>
+                                    <input type="text" id="productName" placeholder="Saisir le nom" oninput="updatePreview()">
+                                </div>
+                                <div class="form-group">
+                                    <label>Référence (SKU) <span class="text-muted">(Facultatif)</span></label>
+                                    <input type="text" placeholder="Ex: SKU-001">
+                                </div>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Catégorie</label>
+                                    <select id="productCategory" onchange="updatePreview()">
+                                        <option value="">Sélectionner...</option>
+                                        <option value="Alimentaire">Alimentaire</option>
+                                        <option value="Boisson">Boisson</option>
+                                        <option value="Électronique">Électronique</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Marque <span class="text-muted">(Facultatif)</span></label>
+                                    <input type="text" placeholder="Ex: Nestlé">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Étape 2 : Architecture -->
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>2. Architecture et conditionnement</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label>Choisir l'architecture</label>
+                                <select id="architectureType" onchange="updateArchitecture()">
+                                    <option value="simple">Unité seule (1 niveau)</option>
+                                    <option value="pack">Pack → Unité (2 niveaux)</option>
+                                    <option value="carton">Carton → Pack → Unité (3 niveaux)</option>
+                                    <option value="palette">Palette → Carton → Pack → Unité (4 niveaux)</option>
+                                </select>
+                            </div>
+                            <div id="architectureLevels" style="background: #f8f9fa; padding: 15px; border-radius: 6px; border: 1px solid var(--border-color);">
+                                <!-- Rempli par JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Étape 3 : Prix et marges (DYNAMIQUE) -->
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>3. Prix et marges</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-muted" style="margin-bottom: 15px;">
+                                Définissez les prix d'achat et de vente pour chaque niveau. Les champs sont facultatifs.
+                            </p>
+                            <div id="priceLevelsContainer">
+                                <p class="text-muted" style="font-style: italic;">Veuillez d'abord sélectionner une architecture à l'étape 2.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Étape 4 : Stock -->
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>4. Gestion du stock</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Seuil d'alerte</label>
+                                    <input type="number" placeholder="Ex: 10">
+                                </div>
+                                <div class="form-group">
+                                    <label>Stock minimum</label>
+                                    <input type="number" placeholder="Ex: 5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pied de formulaire -->
+                    <div class="form-footer">
+                        <button class="btn btn-outline">Annuler</button>
+                        <button class="btn btn-outline">Enregistrer le brouillon</button>
+                        <button class="btn btn-primary">💾 Enregistrer le produit</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- COLONNE DROITE : APERÇU -->
+            <div class="preview-column">
+                
+                <div class="card">
+                    <div class="card-header">👁️ Aperçu du produit</div>
+                    <div class="card-body">
+                        <div class="preview-box">📷 Image du produit</div>
+                        <div class="info-row">
+                            <span class="info-label">Nom :</span>
+                            <span class="info-value" id="previewName">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Catégorie :</span>
+                            <span class="info-value" id="previewCategory">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Architecture :</span>
+                            <span class="info-value" id="previewArchitecture">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">📊 Résumé de l'architecture</div>
+                    <div class="card-body">
+                        <div class="info-row">
+                            <span class="info-label">Niveaux :</span>
+                            <span class="info-value" id="previewLevels">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Conversion :</span>
+                            <span class="info-value" id="previewConversion">-</span>
+                        </div>
+                        
+                        <div class="stock-total-box">
+                            <div class="label">Stock total (unités de base)</div>
+                            <div class="value" id="totalStock">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Résumé des prix -->
+                <div class="card">
+                    <div class="card-header">💰 Résumé des prix & marges</div>
+                    <div class="card-body">
+                        <div id="priceSummaryContainer">
+                            <p class="text-muted" style="font-style: italic;">Aucun prix saisi.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. Gestion de l'Accordéon ---
+        function toggleAccordion(element) {
+            const content = element.nextElementSibling;
+            const allHeaders = document.querySelectorAll('.accordion-header');
+            const allContents = document.querySelectorAll('.accordion-content');
+
+            allHeaders.forEach(h => h.classList.remove('active'));
+            allContents.forEach(c => c.classList.remove('show'));
+
+            element.classList.add('active');
+            content.classList.add('show');
+        }
+
+        function updatePreview() {
+            const name = document.getElementById('productName').value || '-';
+            const category = document.getElementById('productCategory').value || '-';
+            document.getElementById('previewName').textContent = name;
+            document.getElementById('previewCategory').textContent = category;
+        }
+
+        // --- 2. Logique de l'Architecture et Calcul du Stock ---
+        const architectures = {
+            simple: {
+                name: "Unité seule",
+                levels: 1,
+                html: `
+                    <div class="form-group">
+                        <label>Unité de base</label>
+                        <input type="text" value="Unité" disabled style="background:#e9ecef;">
+                    </div>
+                `,
+                priceHtml: `
+                    <div class="price-level-block">
+                        <div class="price-level-title">Unité de base</div>
+                        <div class="price-inputs">
+                            <div class="form-group">
+                                <label>Prix d'achat (€)</label>
+                                <input type="number" id="pa_lvl1" placeholder="0.00" oninput="calculatePrices()">
+                            </div>
+                            <div class="form-group">
+                                <label>Prix de vente (€)</label>
+                                <input type="number" id="pv_lvl1" placeholder="0.00" oninput="calculatePrices()">
+                            </div>
+                            <div class="form-group">
+                                <label>Marge</label>
+                                <input type="text" id="marge_lvl1" value="-" disabled style="background:#f8f9fa; text-align:center; font-weight:600; color:#28a745;">
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            pack: {
+                name: "Pack → Unité",
+                levels: 2,
+                html: `
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nom du niveau 2</label>
+                            <input type="text" value="Pack" id="lvl2Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Multiplicateur (Unités par Pack)</label>
+                            <input type="number" id="lvl2Multi" value="6" oninput="calculateTotalStock()">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantité en stock (Packs)</label>
+                        <input type="number" id="lvl2Qty" value="0" oninput="calculateTotalStock()">
+                    </div>
+                `,
+                priceHtml: `
+                    <div class="price-level-block">
+                        <div class="price-level-title">Unité de base</div>
+                        <div class="price-inputs">
+                            <div class="form-group"><label>Prix d'achat</label><input type="number" id="pa_lvl1" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Prix de vente</label><input type="number" id="pv_lvl1" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Marge</label><input type="text" id="marge_lvl1" value="-" disabled style="background:#f8f9fa; text-align:center; font-weight:600; color:#28a745;"></div>
+                        </div>
+                    </div>
+                    <div class="price-level-block">
+                        <div class="price-level-title">Pack</div>
+                        <div class="price-inputs">
+                            <div class="form-group"><label>Prix d'achat</label><input type="number" id="pa_lvl2" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Prix de vente</label><input type="number" id="pv_lvl2" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Marge</label><input type="text" id="marge_lvl2" value="-" disabled style="background:#f8f9fa; text-align:center; font-weight:600; color:#28a745;"></div>
+                        </div>
+                    </div>
+                `
+            },
+            carton: {
+                name: "Carton → Pack → Unité",
+                levels: 3,
+                html: `
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nom Niveau 2 (ex: Pack)</label>
+                            <input type="text" value="Pack" id="lvl2Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Multiplicateur (Unités/Pack)</label>
+                            <input type="number" id="lvl2Multi" value="6" oninput="calculateTotalStock()">
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nom Niveau 3 (ex: Carton)</label>
+                            <input type="text" value="Carton" id="lvl3Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Multiplicateur (Packs/Carton)</label>
+                            <input type="number" id="lvl3Multi" value="12" oninput="calculateTotalStock()">
+                        </div>
+                    </div>
+                    <hr style="margin: 15px 0; border: 0; border-top: 1px solid #e9ecef;">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Stock en Cartons</label>
+                            <input type="number" id="lvl3Qty" value="2" oninput="calculateTotalStock()">
+                        </div>
+                        <div class="form-group">
+                            <label>Stock en Packs</label>
+                            <input type="number" id="lvl2Qty" value="3" oninput="calculateTotalStock()">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Stock en Unités</label>
+                        <input type="number" id="lvl1Qty" value="4" oninput="calculateTotalStock()">
+                    </div>
+                `,
+                priceHtml: `
+                    <div class="price-level-block">
+                        <div class="price-level-title">Unité de base</div>
+                        <div class="price-inputs">
+                            <div class="form-group"><label>Prix d'achat</label><input type="number" id="pa_lvl1" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Prix de vente</label><input type="number" id="pv_lvl1" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Marge</label><input type="text" id="marge_lvl1" value="-" disabled style="background:#f8f9fa; text-align:center; font-weight:600; color:#28a745;"></div>
+                        </div>
+                    </div>
+                    <div class="price-level-block">
+                        <div class="price-level-title">Pack</div>
+                        <div class="price-inputs">
+                            <div class="form-group"><label>Prix d'achat</label><input type="number" id="pa_lvl2" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Prix de vente</label><input type="number" id="pv_lvl2" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Marge</label><input type="text" id="marge_lvl2" value="-" disabled style="background:#f8f9fa; text-align:center; font-weight:600; color:#28a745;"></div>
+                        </div>
+                    </div>
+                    <div class="price-level-block">
+                        <div class="price-level-title">Carton</div>
+                        <div class="price-inputs">
+                            <div class="form-group"><label>Prix d'achat</label><input type="number" id="pa_lvl3" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Prix de vente</label><input type="number" id="pv_lvl3" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Marge</label><input type="text" id="marge_lvl3" value="-" disabled style="background:#f8f9fa; text-align:center; font-weight:600; color:#28a745;"></div>
+                        </div>
+                    </div>
+                `
+            },
+            palette: {
+                name: "Palette → Carton → Pack → Unité",
+                levels: 4,
+                html: `
+                     <div class="form-group">
+                        <label>Configuration complexe (simplifiée pour la démo)</label>
+                        <p class="text-muted">Multiplicateurs : Palette(10) x Carton(12) x Pack(6)</p>
+                    </div>
+                    <div class="form-grid">
+                         <div class="form-group">
+                            <label>Stock Palettes</label>
+                            <input type="number" id="lvl4Qty" value="1" oninput="calculateTotalStock()">
+                        </div>
+                         <div class="form-group">
+                            <label>Stock Cartons</label>
+                            <input type="number" id="lvl3Qty" value="0" oninput="calculateTotalStock()">
+                        </div>
+                    </div>
+                     <div class="form-grid">
+                         <div class="form-group">
+                            <label>Stock Packs</label>
+                            <input type="number" id="lvl2Qty" value="0" oninput="calculateTotalStock()">
+                        </div>
+                         <div class="form-group">
+                            <label>Stock Unités</label>
+                            <input type="number" id="lvl1Qty" value="0" oninput="calculateTotalStock()">
+                        </div>
+                    </div>
+                    <input type="hidden" id="lvl2Multi" value="6">
+                    <input type="hidden" id="lvl3Multi" value="12">
+                    <input type="hidden" id="lvl4Multi" value="10">
+                `,
+                priceHtml: `
+                    <div class="price-level-block">
+                        <div class="price-level-title">Unité de base</div>
+                        <div class="price-inputs">
+                            <div class="form-group"><label>Prix d'achat</label><input type="number" id="pa_lvl1" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Prix de vente</label><input type="number" id="pv_lvl1" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Marge</label><input type="text" id="marge_lvl1" value="-" disabled style="background:#f8f9fa; text-align:center; font-weight:600; color:#28a745;"></div>
+                        </div>
+                    </div>
+                    <div class="price-level-block">
+                        <div class="price-level-title">Pack</div>
+                        <div class="price-inputs">
+                            <div class="form-group"><label>Prix d'achat</label><input type="number" id="pa_lvl2" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Prix de vente</label><input type="number" id="pv_lvl2" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Marge</label><input type="text" id="marge_lvl2" value="-" disabled style="background:#f8f9fa; text-align:center; font-weight:600; color:#28a745;"></div>
+                        </div>
+                    </div>
+                    <div class="price-level-block">
+                        <div class="price-level-title">Carton</div>
+                        <div class="price-inputs">
+                            <div class="form-group"><label>Prix d'achat</label><input type="number" id="pa_lvl3" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Prix de vente</label><input type="number" id="pv_lvl3" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Marge</label><input type="text" id="marge_lvl3" value="-" disabled style="background:#f8f9fa; text-align:center; font-weight:600; color:#28a745;"></div>
+                        </div>
+                    </div>
+                    <div class="price-level-block">
+                        <div class="price-level-title">Palette</div>
+                        <div class="price-inputs">
+                            <div class="form-group"><label>Prix d'achat</label><input type="number" id="pa_lvl4" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Prix de vente</label><input type="number" id="pv_lvl4" placeholder="0.00" oninput="calculatePrices()"></div>
+                            <div class="form-group"><label>Marge</label><input type="text" id="marge_lvl4" value="-" disabled style="background:#f8f9fa; text-align:center; font-weight:600; color:#28a745;"></div>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        function updateArchitecture() {
+            const type = document.getElementById('architectureType').value;
+            const container = document.getElementById('architectureLevels');
+            const priceContainer = document.getElementById('priceLevelsContainer');
+            const data = architectures[type];
+
+            container.innerHTML = data.html;
+            document.getElementById('previewArchitecture').textContent = data.name;
+            document.getElementById('previewLevels').textContent = data.levels;
+
+            priceContainer.innerHTML = data.priceHtml;
+
+            calculateTotalStock();
+            calculatePrices();
+        }
+
+        function calculateTotalStock() {
+            const type = document.getElementById('architectureType').value;
+            let total = 0;
+            let conversionText = "";
+
+            const getVal = (id) => {
+                const el = document.getElementById(id);
+                return el ? parseFloat(el.value) || 0 : 0;
+            };
+
+            if (type === 'simple') {
+                total = 0;
+                conversionText = "1 Unité";
+            } 
+            else if (type === 'pack') {
+                const multi2 = getVal('lvl2Multi');
+                const qty2 = getVal('lvl2Qty');
+                total = qty2 * multi2;
+                conversionText = `1 Pack = ${multi2} Unités`;
+            } 
+            else if (type === 'carton') {
+                const multi2 = getVal('lvl2Multi');
+                const multi3 = getVal('lvl3Multi');
+                const qty3 = getVal('lvl3Qty');
+                const qty2 = getVal('lvl2Qty');
+                const qty1 = getVal('lvl1Qty');
+
+                total = (qty3 * multi3 * multi2) + (qty2 * multi2) + qty1;
+                conversionText = `1 Carton = ${multi3} Packs = ${multi3 * multi2} Unités`;
+            } 
+            else if (type === 'palette') {
+                const multi2 = 6; const multi3 = 12; const multi4 = 10;
+                const qty4 = getVal('lvl4Qty');
+                const qty3 = getVal('lvl3Qty');
+                const qty2 = getVal('lvl2Qty');
+                const qty1 = getVal('lvl1Qty');
+
+                total = (qty4 * multi4 * multi3 * multi2) + (qty3 * multi3 * multi2) + (qty2 * multi2) + qty1;
+                conversionText = `1 Palette = ${multi4} Cartons = ${multi4*multi3*multi2} Unités`;
+            }
+
+            document.getElementById('totalStock').textContent = total;
+            document.getElementById('previewConversion').textContent = conversionText;
+        }
+
+        function calculatePrices() {
+            const type = document.getElementById('architectureType').value;
+            const levels = architectures[type].levels;
+            let summaryHtml = "";
+
+            for (let i = 1; i <= levels; i++) {
+                const paInput = document.getElementById(`pa_lvl${i}`);
+                const pvInput = document.getElementById(`pv_lvl${i}`);
+                const margeInput = document.getElementById(`marge_lvl${i}`);
+
+                if (paInput && pvInput && margeInput) {
+                    const pa = parseFloat(paInput.value) || 0;
+                    const pv = parseFloat(pvInput.value) || 0;
+                    
+                    let marge = 0;
+                    let margeText = "-";
+                    let margeClass = "";
+
+                    if (pa > 0 && pv > 0) {
+                        marge = pv - pa;
+                        const margePercent = ((marge / pa) * 100).toFixed(0);
+                        margeText = `${marge.toFixed(2)} € (${margePercent}%)`;
+                        margeClass = marge >= 0 ? "positive" : "negative";
+                    } else if (pa > 0 && pv === 0) {
+                        margeText = "Manquant";
+                        margeClass = "";
+                    } else if (pa === 0 && pv > 0) {
+                        margeText = "Manquant";
+                        margeClass = "";
+                    }
+                    
+                    margeInput.value = margeText;
+                    margeInput.className = `margin-badge ${margeClass}`;
+                    margeInput.style.width = "100%";
+
+                    let levelName = "Unité";
+                    if (i === 2) levelName = "Pack";
+                    if (i === 3) levelName = "Carton";
+                    if (i === 4) levelName = "Palette";
+
+                    if (pa > 0 || pv > 0) {
+                        summaryHtml += `
+                            <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed #e9ecef;">
+                                <div style="font-weight: 600; font-size: 0.85rem; color: #343a40; margin-bottom: 4px;">${levelName}</div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #6c757d;">
+                                    <span>Achat: ${pa > 0 ? pa + ' €' : '-'}</span>
+                                    <span>Vente: ${pv > 0 ? pv + ' €' : '-'}</span>
+                                </div>
+                                <div style="font-size: 0.8rem; font-weight: 600; color: ${marge >= 0 ? '#28a745' : '#dc3545'}; margin-top: 4px;">
+                                    Marge: ${margeText}
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+            }
+
+            const summaryContainer = document.getElementById('priceSummaryContainer');
+            if (summaryHtml === "") {
+                summaryContainer.innerHTML = `<p class="text-muted" style="font-style: italic;">Aucun prix saisi.</p>`;
+            } else {
+                summaryContainer.innerHTML = summaryHtml;
+            }
+        }
+
+        window.onload = () => {
+            updatePreview();
+            updateArchitecture();
+        };
+    </script>
+</body>
+</html>
